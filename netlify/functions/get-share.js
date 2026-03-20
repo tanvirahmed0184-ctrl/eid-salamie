@@ -1,6 +1,4 @@
-const { getStore } = require("@netlify/blobs");
-
-const store = getStore("eid_salami_share_links");
+const { connectLambda, getStore } = require("@netlify/blobs");
 const SHARE_ID_PATTERN = /^[A-Za-z0-9_-]{4,16}$/;
 
 function json(statusCode, payload) {
@@ -18,6 +16,9 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "GET") {
     return json(405, { error: "Method Not Allowed" });
   }
+
+  connectLambda(event);
+  const store = getStore("eid_salami_share_links");
 
   const id = event.queryStringParameters?.id?.trim() || "";
   if (!SHARE_ID_PATTERN.test(id)) {

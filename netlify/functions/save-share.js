@@ -1,7 +1,6 @@
 const crypto = require("node:crypto");
-const { getStore } = require("@netlify/blobs");
+const { connectLambda, getStore } = require("@netlify/blobs");
 
-const store = getStore("eid_salami_share_links");
 const MAX_CONFIG_BYTES = 8 * 1024;
 const MAX_ID_ATTEMPTS = 6;
 
@@ -44,7 +43,7 @@ function normalizeConfig(input) {
   return normalized;
 }
 
-async function generateUniqueId() {
+async function generateUniqueId(store) {
   for (let i = 0; i < MAX_ID_ATTEMPTS; i += 1) {
     const candidate = crypto.randomBytes(4).toString("base64url");
     const existing = await store.get(candidate);
@@ -57,6 +56,9 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return json(405, { error: "Method Not Allowed" });
   }
+
+  connectLambda(event);
+  const store = getStore("eid_salami_share_links");
 
   let parsedBody;
   try {
@@ -76,7 +78,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const id = await generateUniqueId();
+    const id = await generateUniqueId(store);
     if (!id) {
       return json(500, { error: "Failed to allocate share ID" });
     }
