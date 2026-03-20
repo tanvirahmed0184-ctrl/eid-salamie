@@ -400,6 +400,7 @@
       .bounce-arrow {
         display: inline-block;
         animation: bounce 1.5s infinite;
+        opacity: 40%;
       }
 
       #cute-btn {
@@ -1463,7 +1464,7 @@
         DOWNLOAD CARD 📸
       </button>
       <button id="cute-btn">
-        সালামি দিবা? <span class="bounce-arrow"></span>
+        সালামি দিবা ? <span class="bounce-arrow"> click</span>
       </button>
 
       <div id="creator-panel" class="settings-panel">
@@ -1699,16 +1700,16 @@
                     id="modal-theme-selector"
                     onchange="changeModalTheme()"
                   >
-                    <option value="theme-basic">🤍 Premium White</option>
-                    <option value="theme-cheque">🏦 Bank Cheque</option>
-                    <option value="theme-eid-card">🌿 Eid Sparkle</option>
-                    <option value="theme-pookie">🎀 Snuggle Pookie</option>
-                    <option value="theme-islamic">🕌 Calm Crescent</option>
-                    <option value="theme-bromance">🫂 Bromance Vibes</option>
-                    <option value="theme-cinematic">🎬 Cinematic Dark</option>
-                    <option value="theme-broke">💸 Broke but Blessed</option>
-                    <option value="theme-savage">🔥 NO Mode</option>
-                    <option value="theme-nerd">💻 Tech Mode</option>
+                    <option value="theme-basic">Premium White</option>
+                    <option value="theme-cheque">Bank Cheque</option>
+                    <option value="theme-eid-card">Eid Sparkle</option>
+                    <option value="theme-pookie">Snuggle Pookie</option>
+                    <option value="theme-islamic">Calm Crescent</option>
+                    <option value="theme-bromance">Bromance Vibes</option>
+                    <option value="theme-cinematic">Cinematic Dark</option>
+                    <option value="theme-broke">Broke but Blessed</option>
+                    <option value="theme-savage">NO Mode</option>
+                    <option value="theme-nerd">Tech Mode</option>
                   </select>
                 </div>
               </div>
@@ -2418,7 +2419,7 @@
           try {
             config = JSON.parse(decodeURIComponent(atob(encodedData)));
             cuteBtn.innerHTML =
-              'নিজের চাকা বানান <span class="bounce-arrow">👇</span>';
+              'Create your own <span class="bounce-arrow">👇</span>';
             // Restore reveal message if it was saved in the link
             if (config.r) {
               const revealInput = document.getElementById(
@@ -2431,11 +2432,12 @@
           }
         } else {
           config.n = [
-            "৫০০ টাকার কড়কড়ে নোট!",
-            "১০০ টাকা",
+            "৫০ টাকার কড়কড়ে নোট!",
+            "১০.২০",
             "কিছুই না! (কপাল খারাপ)",
-            "কাচ্চি বিরিয়ানি!",
-            "১০০০!",
+            "৭.১৫",
+            "০.১৫ পয়সা",
+            "২০ টাকা",
           ];
           setupDefaultCreator();
         }
